@@ -1,0 +1,84 @@
+<html>
+<head>
+
+<!-- NB! для корректной работы нужен GOOGLE_API_KEY
+
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+
+-->	
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false">
+</script>
+
+
+<script>
+
+var currLat = 0;
+var currLng = 0;
+
+
+// инмцмализация текущ параметров координат (в том числе)
+function success(pos) {
+
+	currLat = pos.coords.latitude
+	currLng = pos.coords.longitude
+
+	var latLabel = document.getElementById("current_lat")
+	latLabel.innerHTML = `<span>current latitude: ${currLat}</span>`	
+	var lngLabel = document.getElementById("current_longitude")
+	lngLabel.innerHTML = `<span>current longitude: ${currLng}</span>`	
+/*	<div id="current_longitude"></div>
+*/
+
+
+   	function initialize()
+	{
+		var mapProp = {
+			center: {lat: currLat, lng: currLng},
+			zoom:15,
+			mapTypeId:google.maps.MapTypeId.ROADMAP
+		};
+
+		var map=new google.maps.Map(document.getElementById("taskMap"),mapProp);
+
+
+		var marker = null;
+
+
+		for(let i = 0; i < 10; i++){
+		
+		marker=new google.maps.Marker({
+			position: {lat: currLat, lng: currLng},
+		});
+
+		marker.setMap(map); 
+		currLat+= 0.0018018018018018   // 0.0018018018018018  = 200 м.
+		}
+		
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+}; // success
+
+</script>
+</head>
+
+
+<body> 
+
+	<div id="current_lat"></div>
+	<div id="current_longitude"></div>
+
+
+	<div id="taskMap" style="width:960px;height:700px;"></div>
+</body>
+<script>
+	
+navigator.geolocation.getCurrentPosition(success, (err) => {console.log(err.message)});
+
+</script>
+</html>
+
