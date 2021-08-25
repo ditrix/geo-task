@@ -13,4 +13,4 @@ https://developer.mozilla.org/ru/docs/Web/API/Geolocation/getCurrentPosition
 https://developers.google.com/maps/documentation/javascript/overview
 
 размещено на https://test.askods.com/wrk/mytask.html
-NB! есть проблеммы с отображением карты. (отсутствие ключа, отсутствие учетной записи гугл и т.п.) скрин прилагаю
+NB! есть проблеммы с отображением карты. (отсутствие ключа, отсутствие учетной записи гугл и т.п.) 
